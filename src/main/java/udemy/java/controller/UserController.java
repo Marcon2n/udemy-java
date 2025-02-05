@@ -16,13 +16,12 @@ import jakarta.validation.Valid;
 import udemy.java.dto.request.UserRequestDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     @PostMapping("/")
-    public String getUser(@Valid @RequestBody UserRequestDTO userDTO){
+    public String getUser(@Valid @RequestBody UserRequestDTO userDTO) {
         return "User added";
     }
 
@@ -33,7 +32,7 @@ public class UserController {
     }
 
     @PatchMapping("/{userId}")
-    public String changeStatus (@PathVariable int userId, @RequestParam (required = false) boolean status) {
+    public String changeStatus(@PathVariable int userId, @RequestParam(required = false) boolean status) {
         System.out.println("Change status user with user id: " + userId + ", status: " + status);
         return "User changed status";
     }
@@ -51,9 +50,11 @@ public class UserController {
     }
 
     @GetMapping("/get-list")
-    public List<UserRequestDTO> getAllUser(@RequestParam(required = false) int pageNo, @RequestParam (required = false) int pageSize) {
+    public List<UserRequestDTO> getAllUser(@RequestParam(required = false, defaultValue = "0") int pageNo,
+            @RequestParam(required = false, defaultValue = "10") int pageSize) {
         System.out.println("Get list user with page number: " + pageNo + ", and page size: " + pageSize);
-        return List.of(new UserRequestDTO("Trần", "Thị Xuân Diệu", "0356696987", "xdsandy@gmail.com"), new UserRequestDTO("Trịnh", "Tuấn Linh", "0901364869", "tuanlinhtrinh91@gmail.com"));
+        return List.of(new UserRequestDTO("Trần", "Thị Xuân Diệu", "0356696987", "xdsandy@gmail.com"),
+                new UserRequestDTO("Trịnh", "Tuấn Linh", "0901364869", "tuanlinhtrinh91@gmail.com"));
     }
-    
+
 }
